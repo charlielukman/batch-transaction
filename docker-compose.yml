@@ -12,6 +12,14 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+  frontend:
+    build:
+      context: ./frontend/react-batch-transaction
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+    ports:
+      - "3000:80"
   db:
     platform: linux/x86_64
     image: postgres:14.1-alpine
