@@ -90,6 +90,48 @@ This table have relation with transaction, the main transaction can have multipl
 - **description:** Description of the transaction detail.
 - **transfer_date:** Timestamp indicating the transfer date of the transaction detail.
 
+## Endpoint list
+### Endpoint List
+
+#### Healthcheck
+
+- **GET** `/health`
+
+#### Send OTP
+
+- **POST** `/api/otp/send`
+
+#### Register User
+
+- **POST** `/api/auth/register`
+
+#### Login User
+
+- **POST** `/api/auth/login`
+
+#### Transactions
+
+_All `/api/transactions` endpoints require access token provided on Authorization Header._
+
+- **Create Transaction by Uploading CSV**
+
+  - **POST** `/api/transactions/create`
+
+- **Summary of Total Transactions**
+
+  - **GET** `/api/transactions/summary`
+
+- **Auditing Purpose (Verify or Reject Transaction)**
+
+  - **PATCH** `/api/transactions/{id}`
+
+- **Get List of Transactions**
+
+  - **GET** `/api/transactions`
+
+- **Transaction Detail (View Detail)**
+
+  - **GET** `/api/transactions/{id}`
 
 
 
