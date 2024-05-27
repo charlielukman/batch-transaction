@@ -7,6 +7,8 @@ services:
       - "${PORT}:1323"
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       db:
         condition: service_healthy
@@ -16,6 +18,8 @@ services:
     build:
       context: ./frontend/react-batch-transaction
       dockerfile: Dockerfile
+    environment:
+      REACT_APP_API_URL: http://app:1323
     depends_on:
       - app
     ports:
