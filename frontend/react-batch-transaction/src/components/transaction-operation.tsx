@@ -17,10 +17,6 @@ type Transaction = {
     FromAccount: string;
     Maker: string;
     TransferDate: string;
-    BankDest: string;
-    AccountIDDest: string;
-    AccountNameDest: string;
-    Amount: number;
     TransactionStatus: string;
     CreatedAt: string;
 };
