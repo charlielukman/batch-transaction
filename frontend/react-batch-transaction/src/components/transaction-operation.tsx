@@ -48,7 +48,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
         const confirmed = window.confirm('Are you sure you want to approve this transaction?');
         if (confirmed) {
           try {
-            const response = await fetch(`http://localhost:1323/api/transactions/${item.ID}`, {
+            const response = await fetch(`http://localhost:8080/api/transactions/${item.ID}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
         const confirmed = window.confirm('Are you sure you want to reject this transaction?');
         if (confirmed) {
           try {
-            const response = await fetch(`http://localhost:1323/api/transactions/${item.ID}`, {
+            const response = await fetch(`http://localhost:8080/api/transactions/${item.ID}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
   
     const fetchDetails = useCallback(async (referenceNo: string) => {
         try {
-            const response = await fetch(`http://localhost:1323/api/transactions/${referenceNo}`, {
+            const response = await fetch(`http://localhost:8080/api/transactions/${referenceNo}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

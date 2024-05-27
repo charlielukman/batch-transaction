@@ -68,7 +68,7 @@ export default function CreateTransactionPage() {
       data.append('user_id', submitData.user_id);
       data.append('maker', submitData.maker);
       console.log("data", data);
-      const response = await fetch("http://localhost:1323/api/transactions/create", {
+      const response = await fetch("http://localhost:8080/api/transactions/create", {
         method: "POST",
         headers: {          
           Authorization: `Bearer ${token}`,

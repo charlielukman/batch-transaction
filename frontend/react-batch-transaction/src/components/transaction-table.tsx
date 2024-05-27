@@ -42,7 +42,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({onReload}) => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                let url = `http://localhost:1323/api/transactions?page=${currentPage}&per_page=${itemsPerPage}`;
+                let url = `http://localhost:8080/api/transactions?page=${currentPage}&per_page=${itemsPerPage}`;
                 
                 url += role === 'Approver' ? '&status=waiting_approval' : '';         
                 const response = await fetch(url, {

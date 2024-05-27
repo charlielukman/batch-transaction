@@ -64,7 +64,7 @@ const RegisterForm: FC = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:1323/api/otp/send", {
+      const response = await fetch("http://localhost:8080/api/otp/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const RegisterForm: FC = () => {
 
     setErrors({});
     try {
-      const response = await fetch("http://localhost:1323/api/auth/register", {
+      const response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
