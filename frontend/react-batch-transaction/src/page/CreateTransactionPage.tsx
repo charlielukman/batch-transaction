@@ -42,15 +42,18 @@ export default function CreateTransactionPage() {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
+
+    const target = event.target as HTMLInputElement;
+    const file = target.files ? target.files[0] : null;
+
     const submitData = {
-      file: event.target[0].files[0],
+      file: file,
       total_amount: formData.transferAmount,
       total_record: formData.totalTransferRecord,
       from_account: accountNo,
       user_id: userId,
       maker: userName,
     };
-    console.log("submitData", submitData);
     handleProcess(submitData);
   };
 
@@ -87,24 +90,26 @@ export default function CreateTransactionPage() {
     }
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
       setFormData((prevState) => ({ ...prevState, filename: file.name }));
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        const lines = e.target.result.split("\n");
-        const data = lines.slice(1).map((line) => {
-          const value = line.split(",")[3];
-          const cleanedValue = value.replace(/[^0-9]/g, ""); // remove non-digit characters
-          return parseInt(cleanedValue, 10); // parse into integer
-        });
-        const sum = data.reduce((a, b) => a + b, 0);
-        const count = data.length;
-
-        setTotalUploadAmount(sum);
-        setTotalRecord(count);
+        if (e.target && typeof e.target.result === 'string') {
+          const lines = e.target.result.split("\n");
+          const data = lines.slice(1).map((line) => {
+            const value = line.split(",")[3];
+            const cleanedValue = value.replace(/[^0-9]/g, ""); // remove non-digit characters
+            return parseInt(cleanedValue, 10); // parse into integer
+          });
+          const sum = data.reduce((a, b) => a + b, 0);
+          const count = data.length;
+  
+          setTotalUploadAmount(sum);
+          setTotalRecord(count);
+        }
       };
       reader.readAsText(file);
     }
