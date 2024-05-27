@@ -23,7 +23,7 @@ export default function AdminPage() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const response = await fetch('${API_URL}/api/transactions/summary', {
+        const response = await fetch(`${API_URL}/api/transactions/summary`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
