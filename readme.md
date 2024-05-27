@@ -67,7 +67,8 @@ This table store registered user, password are hashed for stronger security
 
 #### Table: transactions
 
-This table store main information of uploaded transaction, any uploaded transaction will have transaction status `Waiting Approval`, approver user can approve / reject
+This table store main information of uploaded transaction, any uploaded transaction will have transaction status `Waiting Approval`, approver user can approve / reject.
+Should have relation to users table(maker - users.user_id), but not yet added
 - **id:** UUID primary key for the transaction.
 - **total_amount:** Total amount involved in the transaction.
 - **total_record:** Total number of records in the transaction.
@@ -79,7 +80,7 @@ This table store main information of uploaded transaction, any uploaded transact
 
 #### Table: transaction_details
 
-This table have relation with transaction, the main transaction can have multiple transaction details that can be viewed by user
+This table have relation with transaction, the main transaction can have multiple transaction details that can be viewed by user, transaction details has relationship to transaction id
 - **id:** UUID primary key for the transaction detail.
 - **transaction_id:** Foreign key referencing the transaction to which the detail belongs.
 - **bank_dest:** Bank destination for the transaction.
