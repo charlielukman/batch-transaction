@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FC, FormEvent, useState } from "react";
 import { z } from "zod";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 interface FormData {
   account_number: string;
   account_name: string;
@@ -64,7 +66,7 @@ const RegisterForm: FC = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8080/api/otp/send", {
+      const response = await fetch(`${API_URL}/api/otp/send`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +102,7 @@ const RegisterForm: FC = () => {
 
     setErrors({});
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

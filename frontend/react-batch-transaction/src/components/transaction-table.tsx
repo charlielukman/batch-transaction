@@ -3,6 +3,8 @@ import TransactionOperation from "./transaction-operation";
 import { format } from 'date-fns';
 import { useAuth } from "../hooks/useAuth";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 type Transaction = {
     ID: string;
     TotalAmount: number;
@@ -42,7 +44,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({onReload}) => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                let url = `http://localhost:8080/api/transactions?page=${currentPage}&per_page=${itemsPerPage}`;
+                let url = `${API_URL}/api/transactions?page=${currentPage}&per_page=${itemsPerPage}`;
                 
                 url += role === 'Approver' ? '&status=waiting_approval' : '';         
                 const response = await fetch(url, {

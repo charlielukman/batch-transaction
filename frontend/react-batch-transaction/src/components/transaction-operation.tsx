@@ -9,6 +9,7 @@ import { useState, useCallback } from 'react';
 import React from "react";
 import { format } from "date-fns";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 type Transaction = {
     ID: string;
@@ -48,7 +49,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
         const confirmed = window.confirm('Are you sure you want to approve this transaction?');
         if (confirmed) {
           try {
-            const response = await fetch(`http://localhost:8080/api/transactions/${item.ID}`, {
+            const response = await fetch(`${API_URL}/api/transactions/${item.ID}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
         const confirmed = window.confirm('Are you sure you want to reject this transaction?');
         if (confirmed) {
           try {
-            const response = await fetch(`http://localhost:8080/api/transactions/${item.ID}`, {
+            const response = await fetch(`${API_URL}/api/transactions/${item.ID}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +92,7 @@ const TransactionOperation: React.FC<TransactionOperationProps> = React.memo(({i
   
     const fetchDetails = useCallback(async (referenceNo: string) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/transactions/${referenceNo}`, {
+            const response = await fetch(`${API_URL}/api/transactions/${referenceNo}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

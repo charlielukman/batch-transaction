@@ -3,6 +3,8 @@ import Logout from "../components/logout";
 import { useAuth } from "../hooks/useAuth";
 import { FormEvent, useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function CreateTransactionPage() {
   const auth = useAuth();
   const { token, userId, accountNo, userName } = auth?.user || {};
@@ -68,7 +70,7 @@ export default function CreateTransactionPage() {
       data.append('user_id', submitData.user_id);
       data.append('maker', submitData.maker);
       console.log("data", data);
-      const response = await fetch("http://localhost:8080/api/transactions/create", {
+      const response = await fetch(`${API_URL}/api/transactions/create`, {
         method: "POST",
         headers: {          
           Authorization: `Bearer ${token}`,

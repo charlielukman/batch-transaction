@@ -4,6 +4,8 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { z } from "zod";
 import { useAuth } from "../hooks/useAuth";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 interface FormData {
   account_number: string;
   user_id: string;
@@ -54,7 +56,7 @@ const LoginForm: FC = () => {
 
     setErrors({});
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +100,6 @@ const LoginForm: FC = () => {
     };
     handleLogin(formData);
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>

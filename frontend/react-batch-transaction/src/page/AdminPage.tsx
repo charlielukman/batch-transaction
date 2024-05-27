@@ -5,6 +5,8 @@ import TransactionTable from "../components/transaction-table";
 import { useAuth } from "../hooks/useAuth";
 import { format } from "date-fns";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 type Summary = {
   total_waiting_approval: number;
   total_approved: number;
@@ -21,7 +23,7 @@ export default function AdminPage() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/transactions/summary', {
+        const response = await fetch('${API_URL}/api/transactions/summary', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
