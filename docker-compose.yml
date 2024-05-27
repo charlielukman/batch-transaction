@@ -19,7 +19,7 @@ services:
       context: ./frontend/react-batch-transaction
       dockerfile: Dockerfile
     environment:
-      REACT_APP_API_URL: http://app:1323
+      VITE_API_URL: http://app:1323
     depends_on:
       - app
     ports:
