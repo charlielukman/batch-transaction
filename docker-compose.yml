@@ -6,24 +6,15 @@ services:
     ports:
       - "${PORT}:1323"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgres://postgres:postgres@db:5432/database?sslmode=disable
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      SECRET_KEY: secret
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
-  frontend:
-    build:
-      context: ./frontend/react-batch-transaction
-      dockerfile: Dockerfile
-    environment:
-      VITE_API_URL: http://app:1323
-    depends_on:
-      - app
-    ports:
-      - "3000:80"
   db:
     platform: linux/x86_64
     image: postgres:14.1-alpine
