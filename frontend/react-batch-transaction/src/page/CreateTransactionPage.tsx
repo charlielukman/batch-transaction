@@ -15,7 +15,7 @@ export default function CreateTransactionPage() {
   const [recordError, setRecordError] = useState("");
   const [amountError, setAmountError] = useState("");
   const [isValidationComplete, setIsValidationComplete] = useState(false);
-
+  const [file, setFile] = useState<File | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [messageUploadResult, setMessageUploadResult] = useState("");
@@ -44,10 +44,6 @@ export default function CreateTransactionPage() {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-
-    const target = event.target as HTMLInputElement;
-    const file = target.files ? target.files[0] : null;
-
     const submitData = {
       file: file,
       total_amount: formData.transferAmount,
@@ -69,7 +65,7 @@ export default function CreateTransactionPage() {
       data.append('from_account', submitData.from_account);
       data.append('user_id', submitData.user_id);
       data.append('maker', submitData.maker);
-      console.log("data", data);
+      
       const response = await fetch(`${API_URL}/api/transactions/create`, {
         method: "POST",
         headers: {          
@@ -95,6 +91,8 @@ export default function CreateTransactionPage() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      console.log("fileee", file);
+      setFile(file);
       setFormData((prevState) => ({ ...prevState, filename: file.name }));
 
       const reader = new FileReader();
